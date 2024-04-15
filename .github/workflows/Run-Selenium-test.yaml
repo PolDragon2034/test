@@ -1,0 +1,38 @@
+name: Run Selenium Tests
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install selenium slack_sdk
+
+
+      - name: Run Selenium tests
+        run: pythontest_main.py  
+
+
+      - name: Notify Slack
+        if: always()
+        uses: Ilshidur/action-slack@master
+        with:
+          status: ${{ job.status }}
+          fields: tests
+          color: good
+          mentions: "<@U12345678>" 
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
