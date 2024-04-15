@@ -1,0 +1,14 @@
+name: Deploy to Production Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display Update Message
+        run: echo "The code on the master branch has been updated."
