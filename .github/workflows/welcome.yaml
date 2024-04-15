@@ -1,20 +1,13 @@
-name: Welcome new users
+name: Welcome Message
 
 on:
   issues:
-    types: [opened]
-  pull_request:
     types: [opened]
 
 jobs:
   welcome:
     runs-on: ubuntu-latest
     steps:
-    - name: Welcome new users
-      uses: actions/github-script@v5
-      with:
-        script: |
-          const issue = context.issue;
-          const author = context.payload.sender.login;
-          const message = `Witaj @${author}! Dziękuje za Twoją aktywność w moim repozytorium!`;
-          github.rest.issues.createComment({...issue, body: message});
+      - name: Welcome message
+        run: |
+          echo "Witaj w moim repozytorium! "
