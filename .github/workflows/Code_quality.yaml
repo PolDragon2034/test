@@ -1,9 +1,9 @@
-name: Code Quality Check
+name: Python Code Quality Check
 
 on:
   pull_request:
     branches:
-      - main  # Adjust the branch name as needed
+      - main  
 
 jobs:
   code_quality:
@@ -13,13 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          node-version: '14'
+          python-version: '3.x'  
 
       - name: Install dependencies
-        run: npm install
+        run: pip install flake8  
 
-      - name: Run ESLint
-        run: npm run lint  # Adjust the lint script as per your project setup
+      - name: Run Flake8
+        run: flake
