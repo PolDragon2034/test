@@ -16,5 +16,5 @@ jobs:
         script: |
           const issue = context.issue;
           const author = context.payload.sender.login;
-          const message = `Witaj @${author}! Dziękujemy za Twoją aktywność w naszym repozytorium!`;
+          const message = `Witaj @${author}! Dziękuje za Twoją aktywność w moim repozytorium!`;
           github.rest.issues.createComment({...issue, body: message});
