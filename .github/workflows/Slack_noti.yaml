@@ -1,0 +1,20 @@
+name: Slack Notifications
+
+on:
+  push:
+    branches:
+      - main  # Adjust the branch name as needed
+
+jobs:
+  notify_slack:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Send Slack Notification
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}  # Set up this secret in your repository
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"New push to the repository: '${{ github.repository }}' by '${{ github.actor }}'"}' $SLACK_WEBHOOK
